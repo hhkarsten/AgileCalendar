@@ -1,0 +1,199 @@
+5 Whys
+A/B Test
+Acceptance criteria
+Adaptive Planning
+Agile Coaching Competency Framework
+Agile Fluency
+Agile Manifesto
+Agile Prinzipien
+Agile Testing Quadrants
+Alignment
+Automated Test Checking
+Autonomy
+Backlog Grooming
+Backlog Refinement
+Backlog
+Behavior-driven-development
+Best Practice
+Board
+Bottleneck
+Boundaries
+Broken Comb
+Broken Window Theory
+Burn-Down-Chart
+Burn-Up
+Cadence
+Campfire Stories
+Christopher Avery's Responsibility Process
+Clean Code
+Close Active Leadership
+Code Review
+Collective Code Ownership
+Consensus
+Continuous Delivery
+Continuous Deployment
+Continuous Integration
+Cost of Delay
+Cross team sync
+Culture
+Customer
+Cynefin Framework
+Daily Scrum
+Daily Standup
+Daily
+Decision Making
+Defer Decisions
+Definition of Done
+Definition of Ready
+Demo
+Demo
+Dependencies
+Dev Ops
+Development Team
+Distributed Governance
+Documentation
+E2E integration testing
+Education
+End-to-End integration testing
+Epic
+Estimation Meeting
+Estimation
+Evolution with POPCORN
+Excellence
+Experiment
+Exploratory Testing
+Extreme Programming
+Face-to-Face communication
+Feature toggles
+Feature
+Feedback
+Five Dysfunctions of a Team
+Forecasts & Velocity
+Forecasts
+Four rooms of change
+Gemba Walk
+Goal
+Groan Zone
+Heart of Agile
+Hierarchy
+Impact Mapping
+Impediment
+Incremental
+Information
+Innovation
+INVEST
+Iteration
+Iterative Incremental
+Iterative
+Juhari Window
+Kaikaku
+Kaizen
+Kanban
+KPIs
+KPIs
+Lead Time
+Lean Canvas
+Lean Startup
+Lean
+Magic Estimation
+Mob programming
+Motivation
+Muda, Mura & Muri
+MVP / MLP
+Network of Teams
+Next Target
+No
+One piece flow
+One to One
+Outcome vs Output
+Pair Programming
+Passion
+Passion
+Personas
+Planning Poker
+Planning
+Pomodoro
+Process
+Product Backlog
+Product Owner
+Pull
+Refactoring
+Relative Estimation
+Release Burnup
+Release
+Retrospektive
+Review
+Risks
+Roadmap
+Roles
+Schneider Culture Model
+Scope
+Scrum Master
+Scrum of Scrums
+Scrum Team
+Scrum Values
+Scrum
+Self-organized
+Self-selection
+Servant Leadership
+Shared responsibility
+Shu Ha Ri
+Slicing
+Sprint Goal
+Sprint
+Stakeholder
+Stop the Line
+Story Map
+Story Points
+Story
+Synergy
+T-Shaped
+Task
+Taskboard
+Team area
+Team Development
+Team Kick-off
+Team Performance
+Team Relationships
+Team Size
+Teamspace
+Technical Debts
+Test driven development
+Tests
+The Mikado Method
+The Project Management Triangle
+The Rider and the Elephant
+Theory of Constraints
+Time Box
+Time to Feedback
+Timebox
+Trade offs
+Transparency
+Trust
+Unifying Goals
+User Journey
+User Story Mapping
+User Story
+Value Stream Map
+Value Stream
+Values
+Velocity
+Vertical Slice
+Vision
+Visualization
+Volatile Documentation
+Waste
+Waste: Defects
+Waste: Delays and Motions
+Waste: Extra Features
+Waste: False Demand
+Waste: Fear
+Waste: Hand-offs
+Waste: Multitasking
+Waste: Partially done work
+Waste: Relearning
+Waste: Task switching
+Waste: Wishful Thinking
+Way of Working
+Working Agreements
+YAGNI
