@@ -28,12 +28,11 @@ listOfSpecialDays = Array.new()
 c = MyCal.new.calendar(:year => 2018,
                        :month => 10,
                        :table_class => "calendar_helper",
-                       :abbrev => 0..-1,
                        :first_day_of_week => 1,
                        :show_today => false,
-                       :calendar_title => "Agile calendar")  do |d|
+                       :calendar_title => "Agile calendar" )  do |d|
 	if ! d.saturday? && ! d.sunday? then
-		content = d.mday.to_s + "</br>" + lines[d.mday].to_s
+		content = d.mday.to_s + "</br></br>" + lines[d.mday].to_s
 		[content]
 	end
 end
@@ -48,5 +47,7 @@ end
 #     end
 #   end
 
-puts c
+puts "<html><body>" + 
+     '<link rel="stylesheet" type="text/css" href="blue.css"></style>' +
+     c + "</body></html>"
 
