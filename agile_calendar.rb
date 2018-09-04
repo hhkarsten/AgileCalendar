@@ -4,7 +4,7 @@ def put_line
 	puts "---------------------------------------------------------------------------------\n\n"
 end
 
-lines = File.readlines("AgileTopics.txt")
+lines = File.readlines("agile_topics.txt")
 r = rand(lines.size)
 index = 0
 done = Array.new
