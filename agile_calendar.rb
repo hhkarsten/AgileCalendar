@@ -30,6 +30,8 @@ c = MyCal.new.calendar(:year => 2018,
                        :calendar_title => "Agile calendar" )  do |d|
 	if ! d.saturday? && ! d.sunday? then
 		[d.mday.to_s + "</br></br>" + lines[done[d.mday]].to_s]
+	else
+		[d.mday.to_s + "</br></br>&nbsp;&nbsp;Slacktime&nbsp;&nbsp;"]
 	end
 end
 
