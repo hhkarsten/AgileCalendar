@@ -12,6 +12,10 @@
   margin: auto;
 }
 
+.calendar_helper {
+  width: 100%;
+}
+
 .monthName th {
   font-weight: normal;
   text-align: right;
