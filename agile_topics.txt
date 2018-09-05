@@ -46,7 +46,6 @@ Defer Decisions
 Definition of Done
 Definition of Ready
 Demo
-Demo
 Dependencies
 Dev Ops
 Development Team
@@ -90,7 +89,6 @@ Kaikaku
 Kaizen
 Kanban
 KPIs
-KPIs
 Lead Time
 Lean Canvas
 Lean Startup
@@ -107,7 +105,6 @@ One piece flow
 One to One
 Outcome vs Output
 Pair Programming
-Passion
 Passion
 Personas
 Planning Poker
