@@ -4,34 +4,62 @@ $LOAD_PATH << '.'
 require "calendar_helper"
 require 'getoptlong'
 require 'date'
+require 'pp'
 
 opts = GetoptLong.new(
-	[ '--file', '-f', GetoptLong::REQUIRED_ARGUMENT ],          
+	[ '--input', '-i', GetoptLong::OPTIONAL_ARGUMENT ],          
 	[ '--month', '-m', GetoptLong::OPTIONAL_ARGUMENT ],
-	[ '--year', '-y', GetoptLong::OPTIONAL_ARGUMENT ],
-	[ '--title', '-t', GetoptLong::OPTIONAL_ARGUMENT ] 
+	[ '--output','-o', GetoptLong::OPTIONAL_ARGUMENT ],
+	[ '--title', '-t', GetoptLong::OPTIONAL_ARGUMENT ],
+	[ '--year',  '-y', GetoptLong::OPTIONAL_ARGUMENT ]
 )
 
 class MyCal
 	include CalendarHelper
 end
 
+def header ()
+	puts <<-EOF
+Content-Type: text/html
+
+<html><body>
+<link rel="stylesheet" type="text/css" href="blue.css"></style>
+EOF
+end
+
+def footer()
+	puts <<-EOF
+</body></html>
+
+EOF
+end
+
+def print_it (content)
+	puts "<!-- "
+	pp ENV
+	puts " -->"
+	puts content
+end
+
+
 file  = "agile_topics.txt"
 month = Date.today.month
 year  = Date.today.year
-title = "Agile calendar for #{month}"
+title = "Agile calendar for #{month} / #{year}"
 
 opts.each do |opt, arg|
-    case opt
-	when '--file'
-		file = arg
-	when '--month'
-		month = arg.to_i
-	when '--year'
-		year = arg.to_i
-	when '--title'
-		title = arg
-	end
+	case opt
+		when '--input'
+			file = arg
+		when '--month'
+			month = arg.to_i
+		when '--year'
+			year = arg.to_i
+		when '--title'
+			title = arg
+		when '--output'
+			output = arg
+		end
 end
 
 
@@ -58,7 +86,7 @@ repeat.times do
 	done[index] = r
 end
 
-c = MyCal.new.calendar(:year => year,
+content = MyCal.new.calendar(:year => year,
                        :month => month,
                        :abbrev => false,
                        :table_class => "calendar_helper",
@@ -72,8 +100,6 @@ c = MyCal.new.calendar(:year => year,
 	end
 end
 
-puts "Content-Type: text/html\n\n" +
-     "<html><body>" + 
-     '<link rel="stylesheet" type="text/css" href="blue.css"></style>' +
-     c + 
-     "</body></html>\n\n"
+header
+print_it(content)
+footer
