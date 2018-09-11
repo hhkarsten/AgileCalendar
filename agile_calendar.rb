@@ -5,17 +5,22 @@ require "calendar_helper"
 require 'getoptlong'
 require 'date'
 require 'pp'
+require 'cgi'
 
-opts = GetoptLong.new(
-	[ '--input', '-i', GetoptLong::OPTIONAL_ARGUMENT ],          
-	[ '--month', '-m', GetoptLong::OPTIONAL_ARGUMENT ],
-	[ '--output','-o', GetoptLong::OPTIONAL_ARGUMENT ],
-	[ '--title', '-t', GetoptLong::OPTIONAL_ARGUMENT ],
-	[ '--year',  '-y', GetoptLong::OPTIONAL_ARGUMENT ]
-)
+$myglobal = ""
+$month = Date.today.month
+$year  = Date.today.year
 
 class MyCal
 	include CalendarHelper
+end
+
+def is_http ()
+
+	if ENV["QUERY_STRING"]
+	then
+		[true]
+	end
 end
 
 def header ()
@@ -35,37 +40,77 @@ EOF
 end
 
 def print_it (content)
-	puts "<!-- "
-	pp ENV
-	puts " -->"
 	puts content
+	puts "<!-- "
+#	pp ENV
+	puts "\n\n\n- "
+	puts $myglobal
+	puts " -\n\n\n"
+	puts "\ninput: "
+	puts $file
+	puts "\nmonth:"
+	puts $month
+	puts "\ntitle: "
+	puts $title
+	puts "\nyear: "
+	puts $year
+	puts "\n\n\n"
+	puts " -->"
 end
 
 
-file  = "agile_topics.txt"
-month = Date.today.month
-year  = Date.today.year
-title = "Agile calendar for #{month} / #{year}"
+if is_http() then
+	params = CGI::parse(ENV["QUERY_STRING"])
+
+#	$myglobal = $myglobal + " PARAMS  " + params.to_s
+
+	params.each_pair { |key, value|
+		case key
+			when "month"
+				$month = value[0].to_i
+			when "title"
+				$title = value[0].to_s
+			when "year"
+				$year = value[0].to_i
+
+		end
+	$myglobal = $myglobal + " loop  #{key} / #{value[0]} \n"
+	}
+	opts = []
+else
+	opts = GetoptLong.new(
+		[ '--input', '-i', GetoptLong::OPTIONAL_ARGUMENT ],          
+		[ '--month', '-m', GetoptLong::OPTIONAL_ARGUMENT ],
+		[ '--output','-o', GetoptLong::OPTIONAL_ARGUMENT ],
+		[ '--title', '-t', GetoptLong::OPTIONAL_ARGUMENT ],
+		[ '--year',  '-y', GetoptLong::OPTIONAL_ARGUMENT ]
+	)
+end
+
+
 
 opts.each do |opt, arg|
 	case opt
 		when '--input'
-			file = arg
+			$file = arg
 		when '--month'
-			month = arg.to_i
+			$month = arg.to_i
 		when '--year'
-			year = arg.to_i
+			$year = arg.to_i
 		when '--title'
-			title = arg
+			$title = arg
 		when '--output'
-			output = arg
-		end
+			$output = arg
+	end
 end
 
+$file  = "agile_topics.txt"
+$title = "Agile calendar for #{Date::MONTHNAMES[$month]} #{$year}"
 
-if ! lines = File.readlines(file)
+
+if ! lines = File.readlines($file)
 then
-	exit "Unable to open file #{file}"
+	exit "Unable to open file #{$file}"
 end
 
 lines.reject! { |c| c.chomp!; c.empty? }
@@ -86,13 +131,13 @@ repeat.times do
 	done[index] = r
 end
 
-content = MyCal.new.calendar(:year => year,
-                       :month => month,
+content = MyCal.new.calendar(:year => $year,
+                       :month => $month,
                        :abbrev => false,
                        :table_class => "calendar_helper",
                        :first_day_of_week => 1,
                        :show_today => false,
-                       :calendar_title => title )  do |d|
+                       :calendar_title => $title )  do |d|
 	if ! d.saturday? && ! d.sunday? then
 		[d.mday.to_s + "</br></br><b>" + lines[done[d.mday]].to_s + "</b>"]
 	else
@@ -103,3 +148,5 @@ end
 header
 print_it(content)
 footer
+
+
