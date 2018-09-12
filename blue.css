@@ -17,6 +17,11 @@
   font-family: arial,helvetica,sans serif;
 }
 
+th {
+  font-weight: bold;
+  font-size: 2em;
+}
+
 .monthName th {
   font-weight: normal;
   font-size: 1em;
