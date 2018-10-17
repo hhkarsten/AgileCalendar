@@ -116,10 +116,18 @@ end
 
 $file  = "agile_topics.txt"
 
-if $title == "" then
-	$title = "Agile calendar for #{Date::MONTHNAMES[$month]} #{$year}"
+
+if $year.to_i < Date.today.year.to_i then
+	$year = Date.today.year
 end
 
+if $month.to_i < 1 || $month.to_i > 12 then
+	$month = Date.today.month
+end
+
+if $title == "" then
+	$title = "My Agile calendar for #{Date::MONTHNAMES[$month]} #{$year}"
+end
 
 if ! lines = File.readlines($file)
 then
