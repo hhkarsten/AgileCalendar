@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# encoding: UTF-8
 
 $LOAD_PATH << '.'
 require "calendar_helper"
@@ -7,13 +8,15 @@ require 'date'
 require 'pp'
 require 'cgi'
 
-$myglobal = ""
-$month = Date.today.month
-$year  = Date.today.year
-
 class MyCal
 	include CalendarHelper
 end
+
+$myglobal = ""
+$month   = Date.today.month
+$year    = Date.today.year
+$overall = ""
+$title   = ""
 
 def is_http ()
 
@@ -42,7 +45,6 @@ end
 def print_it (content)
 	puts content
 	puts "<!-- "
-#	pp ENV
 	puts "\n\n\n- "
 	puts $myglobal
 	puts " -\n\n\n"
@@ -55,6 +57,8 @@ def print_it (content)
 	puts "\nyear: "
 	puts $year
 	puts "\n\n\n"
+	puts "OVERALL\n"
+	puts $overall
 	puts " -->"
 end
 
@@ -62,19 +66,21 @@ end
 if is_http() then
 	params = CGI::parse(ENV["QUERY_STRING"])
 
-#	$myglobal = $myglobal + " PARAMS  " + params.to_s
-
 	params.each_pair { |key, value|
 		case key
 			when "month"
 				$month = value[0].to_i
+				$overall = $overall + "M: #{$month}"
 			when "title"
 				$title = value[0].to_s
+				$overall = $overall + "T: #{$title}"
 			when "year"
 				$year = value[0].to_i
-
+				$overall = $overall + "Y: #{$year}"
 		end
-	$myglobal = $myglobal + " loop  #{key} / #{value[0]} \n"
+
+$overall = $overall + " / LOOP: #{key} / "
+
 	}
 	opts = []
 else
@@ -93,19 +99,26 @@ opts.each do |opt, arg|
 	case opt
 		when '--input'
 			$file = arg
+			$overall = $overall + "CL-F: " + $file
 		when '--month'
-			$month = arg.to_i
+			$month = arg.to_s
+			$overall = $overall + "CL-M: " + $month
 		when '--year'
-			$year = arg.to_i
+			$year = arg.to_s
+			$overall = $overall + "CL-Y: " + $year
 		when '--title'
 			$title = arg
+			$overall = $overall + "CL-T: " + $title
 		when '--output'
 			$output = arg
 	end
 end
 
 $file  = "agile_topics.txt"
-$title = "Agile calendar for #{Date::MONTHNAMES[$month]} #{$year}"
+
+if $title == "" then
+	$title = "Agile calendar for #{Date::MONTHNAMES[$month]} #{$year}"
+end
 
 
 if ! lines = File.readlines($file)
