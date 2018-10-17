@@ -70,17 +70,11 @@ if is_http() then
 		case key
 			when "month"
 				$month = value[0].to_i
-				$overall = $overall + "M: #{$month}"
 			when "title"
 				$title = value[0].to_s
-				$overall = $overall + "T: #{$title}"
 			when "year"
 				$year = value[0].to_i
-				$overall = $overall + "Y: #{$year}"
 		end
-
-$overall = $overall + " / LOOP: #{key} / "
-
 	}
 	opts = []
 else
@@ -99,23 +93,18 @@ opts.each do |opt, arg|
 	case opt
 		when '--input'
 			$file = arg
-			$overall = $overall + "CL-F: " + $file
 		when '--month'
 			$month = arg.to_s
-			$overall = $overall + "CL-M: " + $month
 		when '--year'
 			$year = arg.to_s
-			$overall = $overall + "CL-Y: " + $year
 		when '--title'
 			$title = arg
-			$overall = $overall + "CL-T: " + $title
 		when '--output'
 			$output = arg
 	end
 end
 
 $file  = "agile_topics.txt"
-
 
 if $year.to_i < Date.today.year.to_i then
 	$year = Date.today.year
