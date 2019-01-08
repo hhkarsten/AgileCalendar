@@ -12,14 +12,16 @@ class MyCal
 	include CalendarHelper
 end
 
-$myglobal = ""
-$month   = Date.today.month
-$year    = Date.today.year
-$overall = ""
-$title   = ""
+$myglobal    = ""
+$month       = Date.today.month
+$year        = Date.today.year
+$overall     = ""
+$title       = ""
+$subtitle1   = ""
+$subtitle2   = ""
+$subtitle3   = ""
 
 def is_http ()
-
 	if ENV["QUERY_STRING"]
 	then
 		[true]
@@ -42,24 +44,18 @@ def footer()
 EOF
 end
 
-def print_it (content)
+def print_it (content, s1, s2, s3)
 	puts content
-	puts "<!-- "
-	puts "\n\n\n- "
-	puts $myglobal
-	puts " -\n\n\n"
-	puts "\ninput: "
-	puts $file
-	puts "\nmonth:"
-	puts $month
-	puts "\ntitle: "
-	puts $title
-	puts "\nyear: "
-	puts $year
-	puts "\n\n\n"
-	puts "OVERALL\n"
-	puts $overall
-	puts " -->"
+	unless s1.empty?
+		puts "<h1 class=\"common\">Fragen zum jeweiligen Begriff:</h1>"
+		puts "<h2 class=\"common\">#{s1}</h2>"
+	end
+	unless s2.empty?
+		puts "<h2 class=\"common\">#{s2}</h2>"
+	end
+	unless s3.empty?
+		puts "<h2 class=\"common\">#{s3}</h2>"
+	end
 end
 
 
@@ -72,6 +68,12 @@ if is_http() then
 				$month = value[0].to_i
 			when "title"
 				$title = value[0].to_s
+			when "subtitle1"
+				$subtitle1 = value[0].to_s
+			when "subtitle2"
+				$subtitle2 = value[0].to_s
+			when "subtitle3"
+				$subtitle3 = value[0].to_s
 			when "year"
 				$year = value[0].to_i
 		end
@@ -79,11 +81,14 @@ if is_http() then
 	opts = []
 else
 	opts = GetoptLong.new(
-		[ '--input', '-i', GetoptLong::OPTIONAL_ARGUMENT ],          
-		[ '--month', '-m', GetoptLong::OPTIONAL_ARGUMENT ],
-		[ '--output','-o', GetoptLong::OPTIONAL_ARGUMENT ],
-		[ '--title', '-t', GetoptLong::OPTIONAL_ARGUMENT ],
-		[ '--year',  '-y', GetoptLong::OPTIONAL_ARGUMENT ]
+		[ '--input',     '-i', GetoptLong::OPTIONAL_ARGUMENT ],          
+		[ '--month',     '-m', GetoptLong::OPTIONAL_ARGUMENT ],
+		[ '--output',    '-o', GetoptLong::OPTIONAL_ARGUMENT ],
+		[ '--title',     '-t', GetoptLong::OPTIONAL_ARGUMENT ],
+		[ '--subtitle1', '-1', GetoptLong::OPTIONAL_ARGUMENT ],
+		[ '--subtitle2', '-2', GetoptLong::OPTIONAL_ARGUMENT ],
+		[ '--subtitle3', '-3', GetoptLong::OPTIONAL_ARGUMENT ],
+		[ '--year',      '-y', GetoptLong::OPTIONAL_ARGUMENT ]
 	)
 end
 
@@ -97,11 +102,18 @@ opts.each do |opt, arg|
 			$month = arg.to_s
 		when '--year'
 			$year = arg.to_s
+		when '--subtitle1'
+			$subtitle1 = arg
+		when '--subtitle2'
+			$subtitle2 = arg
+		when '--subtitle3'
+			$subtitle3 = arg
 		when '--title'
 			$title = arg
 		when '--output'
 			$output = arg
 	end
+#	puts "opt: #{opt} / arg: #{arg}\n"
 end
 
 $file  = "agile_topics.txt"
@@ -115,7 +127,7 @@ if $month.to_i < 1 || $month.to_i > 12 then
 end
 
 if $title == "" then
-	$title = "My Agile calendar for #{Date::MONTHNAMES[$month]} #{$year}"
+	$title = "Agile calendar for #{Date::MONTHNAMES[$month]} #{$year}"
 end
 
 if ! lines = File.readlines($file)
@@ -156,7 +168,7 @@ content = MyCal.new.calendar(:year => $year,
 end
 
 header
-print_it(content)
+print_it(content, $subtitle1, $subtitle2, $subtitle3)
 footer
 
 
