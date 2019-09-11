@@ -84,7 +84,7 @@ INVEST
 Iteration
 Iterative Incremental
 Iterative
-Juhari Window
+Johari Window
 Kaikaku
 Kaizen
 Kanban
