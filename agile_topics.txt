@@ -153,7 +153,7 @@ Team Kick-off
 Team Performance
 Team Relationships
 Team Size
-Teamspace
+Team space
 Technical Debts
 Test driven development
 Tests
