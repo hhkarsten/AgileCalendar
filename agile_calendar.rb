@@ -161,7 +161,7 @@ content = MyCal.new.calendar(:year => $year,
                        :show_today => false,
                        :calendar_title => $title )  do |d|
 	if ! d.saturday? && ! d.sunday? then
-		[d.mday.to_s + "</br></br><b>" + lines[done[d.mday]].to_s + "</b>"]
+		[d.mday.to_s + "</br></br><b><a href='http://www.google.com/search?q=\"" + lines[done[d.mday]].to_s + "\"+agile&btnI'>" + lines[done[d.mday]].to_s + "</a></b>"]
 	else
 		[d.mday.to_s + "</br></br>&nbsp;&nbsp;Slack time&nbsp;&nbsp;"]
 	end
